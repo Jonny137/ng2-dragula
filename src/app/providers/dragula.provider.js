@@ -113,7 +113,7 @@ var DragulaService = (function () {
             else {
                 var notCopy = dragElm === dropElm;
                 targetModel = drake.models[drake.containers.indexOf(target)];
-                targetParent = drake.models[drake.containers.indexOf(target)];
+                targetParent = drake.parents[drake.containers.indexOf(target)];
                 var dropElmModel = notCopy ? sourceModel[dragIndex] : JSON.parse(JSON.stringify(sourceModel[dragIndex]));
                 if (notCopy) {
                     sourceModel.splice(dragIndex, 1);
