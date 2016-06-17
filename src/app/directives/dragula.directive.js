@@ -61,7 +61,12 @@ var Dragula = (function () {
             }
         }
         if (changes && changes['parent']) {
-            this.drake.parents.splice(modelIndex, 1, changes['parent'].currentValue);
+            if (this.drake.parents) {
+                this.drake.parents.splice(modelIndex, 1, changes['parent'].currentValue);
+            }
+            else {
+                this.drake.parents = [changes['parent'].currentValue];
+            }
         }
     };
     __decorate([
