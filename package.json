@@ -35,7 +35,6 @@
     "ci": "npm run e2e && npm run test",
     "docs": "./node_modules/.bin/typedoc --options typedoc.json src/app/directives/dragula.directive.ts",
     "start": "npm run server",
-    "prepublish": "./node_modules/.bin/typings install && tsc",
     "postversion": "git push origin master && git push --tags"
   },
   "dependencies": {
