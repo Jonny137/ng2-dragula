@@ -15,6 +15,7 @@ import * as dragula from 'dragula';
 export class Dragula implements OnInit, OnChanges {
   @Input('dragula') bag: string;
   @Input() dragulaModel: any;
+  @Input() parent:any;
   private container: any;
   private drake: any;
 
@@ -29,8 +30,10 @@ export class Dragula implements OnInit, OnChanges {
       if (this.dragulaModel) {
         if (this.drake.models) {
           this.drake.models.push(this.dragulaModel);
+          this.drake.parents.push(this.parent);
         } else {
           this.drake.models = [this.dragulaModel];
+          this.drake.parents = [this.parent];
         }
       }
     };
@@ -59,6 +62,9 @@ export class Dragula implements OnInit, OnChanges {
           this.drake.models = [changes['dragulaModel'].currentValue];
         }
       }
+    }
+    if(changes && changes['parent']) {
+      this.drake.parents.splice(modelIndex, 1, changes['parent'].currentValue);
     }
   }
 }
