@@ -19,5 +19,8 @@
     "ng2-dragula.ts"
   ],
   "compileOnSave": false,
-  "buildOnSave": false
+  "buildOnSave": false,
+  "ignoreRules": {
+    "TS2307": true
+  }
 }
