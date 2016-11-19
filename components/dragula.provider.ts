@@ -1,20 +1,20 @@
-import * as dragula from 'dragula';
-import {Injectable, EventEmitter} from '@angular/core';
+import { dragula } from './dragula.class';
+import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable()
 export class DragulaService {
-  public cancel:      EventEmitter<any> = new EventEmitter();
-  public cloned:      EventEmitter<any> = new EventEmitter();
-  public drag:        EventEmitter<any> = new EventEmitter();
-  public dragend:     EventEmitter<any> = new EventEmitter();
-  public drop:        EventEmitter<any> = new EventEmitter();
-  public out:         EventEmitter<any> = new EventEmitter();
-  public over:        EventEmitter<any> = new EventEmitter();
-  public remove:      EventEmitter<any> = new EventEmitter();
-  public shadow:      EventEmitter<any> = new EventEmitter();
-  public dropModel:   EventEmitter<any> = new EventEmitter();
+  public cancel: EventEmitter<any> = new EventEmitter();
+  public cloned: EventEmitter<any> = new EventEmitter();
+  public drag: EventEmitter<any> = new EventEmitter();
+  public dragend: EventEmitter<any> = new EventEmitter();
+  public drop: EventEmitter<any> = new EventEmitter();
+  public out: EventEmitter<any> = new EventEmitter();
+  public over: EventEmitter<any> = new EventEmitter();
+  public remove: EventEmitter<any> = new EventEmitter();
+  public shadow: EventEmitter<any> = new EventEmitter();
+  public dropModel: EventEmitter<any> = new EventEmitter();
   public removeModel: EventEmitter<any> = new EventEmitter();
-  private events: Array<string> = [
+  private events: string[] = [
     'cancel',
     'cloned',
     'drag',
@@ -27,7 +27,7 @@ export class DragulaService {
     'dropModel',
     'removeModel'
   ];
-  private bags: Array<any> = [];
+  private bags: any[] = [];
 
   public add(name: string, drake: any): any {
     let bag = this.find(name);
@@ -49,7 +49,7 @@ export class DragulaService {
   }
 
   public find(name: string): any {
-    for (var i = 0; i < this.bags.length; i++) {
+    for (let i = 0; i < this.bags.length; i++) {
       if (this.bags[i].name === name) {
         return this.bags[i];
       }
@@ -63,12 +63,12 @@ export class DragulaService {
     bag.drake.destroy();
   }
 
-  public setOptions(name: string, options: any) {
+  public setOptions(name: string, options: any): void {
     let bag = this.add(name, dragula(options));
     this.handleModels(name, bag.drake);
   }
 
-  private handleModels(name: string, drake: any) {
+  private handleModels(name: string, drake: any): void {
     let dragElm: any;
     let dragIndex: number;
     let dropIndex: number;
@@ -119,20 +119,21 @@ export class DragulaService {
     });
   }
 
-  private setupEvents(bag: any) {
+  private setupEvents(bag: any): void {
     bag.initEvents = true;
     let that: any = this;
     let emitter = (type: any) => {
-      function replicate () {
+      function replicate(): void {
         let args = Array.prototype.slice.call(arguments);
         that[type].emit([bag.name].concat(args));
       }
+
       bag.drake.on(type, replicate);
     };
     this.events.forEach(emitter);
   }
 
-  private domIndexOf(child: any, parent: any) {
+  private domIndexOf(child: any, parent: any): any {
     return Array.prototype.indexOf.call(parent.children, child);
   }
 }
