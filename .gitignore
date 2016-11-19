@@ -26,7 +26,7 @@ npm-debug.log
 /components/**/*.js
 /components/**/*.js.map
 /components/**/*.d.ts
-ng2-dragula.js
+#ng2-dragula.js
 ng2-dragula.d.ts
 ng2-dragula.metadata.json
 ng2-dragula.ngfactory.ts
